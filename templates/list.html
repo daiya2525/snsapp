@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link href="{% static 'list.css' %}" rel="stylesheet">
+{% endblock customcss %}
+
+{% block header %}
+<div class="alert alert-secondary" role="alert">
+    <h3 class="title">SNS</h3>
+    <div class="logoutlink">
+        <button class="btn btn-lg btn-success btn-light" onclick="location.href='http://127.0.0.1:8000/login/'" type="submit">ログアウト</button>
+    </div>
+</div>
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="location.href='http://127.0.0.1:8000/create/'">投稿を作成する</button>
+    {% for item in object_list %}
+    <div class="alert alert-success" role="alert">
+        <p>タイトル:<a href="{% url 'detail' item.pk %}">{{ item.title }}</a></p>
+        <p>投稿者:{{ item.author }}</p>
+        <a href="#" class="btn btn-primary disabled" role="button" aria-pressed="true">いいね: {{item.good}}</a>
+        <a href="#" class="btn btn-secondary disabled" role="button" aria-pressed="true">既読: {{ item.read }}</a>
+    </div>　
+    {% endfor %}
+</div>
+{% endblock content %}
